@@ -1,7 +1,7 @@
 # Assumptions and considerations:
 
 #### Schema
-Shema for tables is created based on values from files and business meaning. Primary keys were created based on the information from the task and absence of duplicates in the data. Everything is not final and requires additional elaboration with business owners.
+Schema for tables is created based on values from files and business meaning. Primary keys were created based on the information from the task and absence of duplicates in the data. Everything is not final and requires additional elaboration with business owners (for example, the task says that calendar has dateId column, but the file has not-mentioned datekey and datecalendarday, and dateId is missing).
 
 #### Files
 Data in all files is expected to contain only those values that are allowed by their types in staging tables.
