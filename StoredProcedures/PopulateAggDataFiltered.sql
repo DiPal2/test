@@ -11,8 +11,6 @@ BEGIN
     RAISERROR(N'Both arguments should not be null', 10, 1);
   END;
 
-  TRUNCATE TABLE dbo.AggSalesDaily;
-
   TRUNCATE TABLE dbo.AggSalesWeekly;
 
   SELECT @keys = STRING_AGG(CONVERT(NVARCHAR(MAX),DateKey), ',')

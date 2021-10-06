@@ -1,9 +1,15 @@
 CREATE OR ALTER PROCEDURE dbo.PopulateAggDataAll
 AS
 BEGIN
-  TRUNCATE TABLE dbo.AggSalesDaily;
+  CREATE TABLE #AggSalesDaily(
+    DateId INT NOT NULL
+   ,StoreId SMALLINT NOT NULL
+   ,ProductId VARCHAR(20) NOT NULL
+   ,AggNetSales NUMERIC(20,2) NOT NULL
+   ,AggSalesUnits INT NOT NULL
+  );
 
-  INSERT INTO dbo.AggSalesDaily(
+  INSERT INTO #AggSalesDaily(
          DateId
         ,StoreId
         ,ProductId
@@ -34,7 +40,7 @@ BEGIN
         ,r.ProductId
         ,SUM(r.AggNetSales)
         ,SUM(r.AggSalesUnits)
-  FROM dbo.AggSalesDaily r
+  FROM #AggSalesDaily r
   INNER JOIN dbo.StagingCalendar c
           ON c.DateKey = r.DateId
   GROUP BY c.DateCalendarYear

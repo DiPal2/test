@@ -1,4 +1,7 @@
-IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = N'dbo' AND TABLE_NAME = N'StagingProduct')
+IF NOT EXISTS (SELECT *
+               FROM INFORMATION_SCHEMA.TABLES
+               WHERE TABLE_SCHEMA = N'dbo'
+                 AND TABLE_NAME = N'StagingProduct')
 BEGIN
   CREATE TABLE dbo.StagingProduct(
     ProductId VARCHAR(20) NOT NULL

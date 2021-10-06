@@ -13,3 +13,11 @@ Azure was chosed as a cloud provider due to existing subscription and the abilit
 
 #### Ingest process
 Data ingestion is performed using bcp utility for files in the local folder due to small development effort. It should be replaced if cloud native services are required to be supported.
+
+#### Job execution
+The desciption of job execution requires clarification.
+The current implementation assumes loading a separate set of files for each job execution.
+Consider another scenario where jobs are executed with different parameters on the same set of files. While the proposed solution is still usable, it lacks some optimizations.
+
+#### Things to be improved
+Add error handling and additional comments to the code.
