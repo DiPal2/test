@@ -5,7 +5,7 @@ Schema for tables is created based on values from files and business meaning. Pr
 
 #### Files
 Data in all files is expected to contain only those values that are allowed by their types in staging tables.
-Files are separated by comma, but can have Linux or Windows line endings.
+Files are separated by comma, sales.csv has Linux line endings, the rest - Windows.
 
 #### Platform
 MS SQL Server was selected as the target DBMS due to the deep knowledge of the subject platform and limited time to complete the task.
@@ -20,4 +20,5 @@ The current implementation assumes loading a separate set of files for each job 
 Consider another scenario where jobs are executed with different parameters on the same set of files. While the proposed solution is still usable, it lacks some optimizations.
 
 #### Things to be improved
-Add error handling and additional comments to the code.
+Add error handling, much better logging, additional tests, comments to the code, more automation.
+StoredProceduresSlow folder has a "usually quick but not optimal" solution that suffers from performance issues as the data grows. However, in some conditions it can work better than the proposed solution (when there is no year/week as an input filter and when the same product is not sold in the same store within one day).
