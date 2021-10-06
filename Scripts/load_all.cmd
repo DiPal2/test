@@ -5,10 +5,15 @@
 @IF "%~5"=="" ECHO Database name is required! & EXIT/B 5
 @SET BCP_CONN_STR=-S %2 -U%3 -P%4 -d %5
 
+@CALL :call_proc dbo.PrepareStagingIngest "%1\empty.log"
+
 @CALL :load_file dbo.StagingCalendar "%1\calendar.csv"
 @CALL :load_file dbo.StagingProduct "%1\product.csv"
 @CALL :load_file dbo.StagingSales "%1\sales.csv" Linux
 @CALL :load_file dbo.StagingStore "%1\store.csv"
+
+@CALL :call_proc dbo.DataCleansing "%1\empty.log"
+
 @EXIT /B 0
 
 :load_file
@@ -16,4 +21,9 @@
 @SET LineSeparator=0x0d0a
 @IF "%3"=="Linux" SET LineSeparator=0x0a
 @bcp %1 IN %2 -F2 -c -t, -r %LineSeparator% -m0 %BCP_CONN_STR%
+@EXIT /B
+
+:call_proc
+@ECHO %TIME% Calling SP %1
+@bcp "EXEC %1;SELECT 'ok';" queryout %2 -c %BCP_CONN_STR%
 @EXIT /B
